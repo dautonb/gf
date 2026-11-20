@@ -75,18 +75,18 @@ DISABLE_REASONING = _env_flag("DISABLE_REASONING", True)   # tắt suy nghĩ dà
 
 # ── Ảnh ──
 IMAGE_ENABLED = _env_flag("IMAGE_ENABLED", True)
-IMAGE_PROACTIVE_CHANCE = _env_num("IMAGE_PROACTIVE_CHANCE", 1.0, float)   # tin chủ động 8h/13h/18h/23h
+IMAGE_PROACTIVE_CHANCE = _env_num("IMAGE_PROACTIVE_CHANCE", 0.3, float)   # tin chủ động 8h/13h/18h/23h
 IMAGE_REPLY_CHANCE = _env_num("IMAGE_REPLY_CHANCE", 0.15, float)          # khi trả lời tin của anh
-IMAGE_COOLDOWN_MIN = _env_num("IMAGE_COOLDOWN_MIN", 30, int)              # giãn cách giữa 2 ảnh "ngẫu nhiên"
-IMAGE_DAILY_MAX = _env_num("IMAGE_DAILY_MAX", 10, int)                    # tối đa ảnh/ngày
+IMAGE_COOLDOWN_MIN = _env_num("IMAGE_COOLDOWN_MIN", 15, int)              # giãn cách giữa 2 ảnh "ngẫu nhiên"
+IMAGE_DAILY_MAX = _env_num("IMAGE_DAILY_MAX", 1000, int)                    # tối đa ảnh/ngày
 IMAGE_ASPECT_RATIO = (os.environ.get("IMAGE_ASPECT_RATIO") or "1:1").strip()
 IMAGE_STYLE = (os.environ.get("IMAGE_STYLE") or
                "casual smartphone photo, natural soft light, warm cozy tone, no text, no watermark").strip()
 
 # Hạn mức request/ngày của TÀI KHOẢN OpenRouter (50 nếu chưa nạp $10; 1000 nếu đã nạp ≥ $10).
-DAILY_REQUEST_BUDGET = _env_num("DAILY_REQUEST_BUDGET", 50, int)
+DAILY_REQUEST_BUDGET = _env_num("DAILY_REQUEST_BUDGET", 100, int)
 # Phần hạn mức luôn để dành cho tin chữ — ảnh chỉ được tạo khi số request đã dùng < budget − reserve.
-IMAGE_RESERVE = _env_num("IMAGE_RESERVE", 15, int)
+IMAGE_RESERVE = _env_num("IMAGE_RESERVE", 50, int)
 
 NICKNAME = (os.environ.get("NICKNAME") or "anh yêu").strip()    # Em gọi anh là gì
 GIRL_NAME = (os.environ.get("GIRL_NAME") or "Bơ").strip()       # Tên của em
