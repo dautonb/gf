@@ -9,6 +9,12 @@ name: "💌 Bạn gái luôn online"
 #     trực gửi đúng giờ; nếu lỡ trễ sẽ được "gửi bù" kèm lời xin lỗi
 #   - Nhật ký trò chuyện lưu ở SECRET GIST (qua GH_GIST_TOKEN)
 #     ⇒ repo public mà tin nhắn vẫn kín đáo
+#   - Bộ não chữ : baidu/ernie-5.5-flash-preview:free   (OpenRouter)
+#   - Ảnh gửi kèm: recraft/recraft-v4.1-flash-v2:free    (OpenRouter, ảnh em "chụp")
+#     ⚠️ Model :free giới hạn 20 request/phút, 50 request/NGÀY cho cả tài khoản
+#        (1000/ngày nếu đã nạp tổng cộng ≥ $10 credits → đặt DAILY_REQUEST_BUDGET=1000).
+#     ⚠️ Bản :free của Recraft được báo ngừng từ 28/11/2026 → đổi IMAGE_MODEL thành
+#        recraft/recraft-v4.1-flash-v2 (trả phí ~$0.007/ảnh) hoặc đặt IMAGE_ENABLED=0.
 #
 # KHUNG GIỜ CA (cron theo UTC, VN = UTC + 7):
 #   00/04/08/12/16/20 UTC = 07/11/15/19/23/03 giờ VN
@@ -49,11 +55,18 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}   # key tại openrouter.ai/settings/keys
           GH_GIST_TOKEN: ${{ secrets.GH_GIST_TOKEN }}   # PAT scope gist — bộ nhớ vô hạn
           # Tùy chọn (đặt trong tab "Variables" nếu muốn đổi):
           NICKNAME: ${{ vars.NICKNAME }}         # em gọi anh là gì (mặc định: anh yêu)
           GIRL_NAME: ${{ vars.GIRL_NAME }}       # tên của em (mặc định: Bơ)
           CONTEXT_LIMIT: ${{ vars.CONTEXT_LIMIT }} # số tin đọc lại khi trả lời (mặc định: 50)
           POLL_HOURS: ${{ vars.POLL_HOURS }}     # độ dài ca trực (mặc định: 3.8)
+          TEXT_MODEL: ${{ vars.TEXT_MODEL }}     # model chữ (mặc định: baidu/ernie-5.5-flash-preview:free)
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}   # model ảnh (mặc định: recraft/recraft-v4.1-flash-v2:free)
+          IMAGE_ENABLED: ${{ vars.IMAGE_ENABLED }}                     # 0 = tắt gửi ảnh (mặc định: 1)
+          IMAGE_PROACTIVE_CHANCE: ${{ vars.IMAGE_PROACTIVE_CHANCE }}   # xác suất kèm ảnh ở tin 8h/13h/18h/23h (mặc định: 1.0)
+          IMAGE_REPLY_CHANCE: ${{ vars.IMAGE_REPLY_CHANCE }}           # xác suất kèm ảnh khi trả lời anh (mặc định: 0.15)
+          IMAGE_DAILY_MAX: ${{ vars.IMAGE_DAILY_MAX }}                 # tối đa ảnh/ngày (mặc định: 10)
+          DAILY_REQUEST_BUDGET: ${{ vars.DAILY_REQUEST_BUDGET }}       # hạn mức request/ngày của tài khoản (mặc định: 50; nạp ≥$10 → 1000)
         run: python src/main.py
