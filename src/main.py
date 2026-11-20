@@ -75,9 +75,9 @@ DISABLE_REASONING = _env_flag("DISABLE_REASONING", True)   # tắt suy nghĩ dà
 
 # ── Ảnh ──
 IMAGE_ENABLED = _env_flag("IMAGE_ENABLED", True)
-IMAGE_PROACTIVE_CHANCE = _env_num("IMAGE_PROACTIVE_CHANCE", 0.3, float)   # tin chủ động 8h/13h/18h/23h
-IMAGE_REPLY_CHANCE = _env_num("IMAGE_REPLY_CHANCE", 0.15, float)          # khi trả lời tin của anh
-IMAGE_COOLDOWN_MIN = _env_num("IMAGE_COOLDOWN_MIN", 15, int)              # giãn cách giữa 2 ảnh "ngẫu nhiên"
+IMAGE_PROACTIVE_CHANCE = _env_num("IMAGE_PROACTIVE_CHANCE", 1, float)   # tin chủ động 8h/13h/18h/23h
+IMAGE_REPLY_CHANCE = _env_num("IMAGE_REPLY_CHANCE", 0.1, float)          # khi trả lời tin của anh
+IMAGE_COOLDOWN_MIN = _env_num("IMAGE_COOLDOWN_MIN", 0, int)              # giãn cách giữa 2 ảnh "ngẫu nhiên"
 IMAGE_DAILY_MAX = _env_num("IMAGE_DAILY_MAX", 1000, int)                    # tối đa ảnh/ngày
 IMAGE_ASPECT_RATIO = (os.environ.get("IMAGE_ASPECT_RATIO") or "1:1").strip()
 IMAGE_STYLE = (os.environ.get("IMAGE_STYLE") or
